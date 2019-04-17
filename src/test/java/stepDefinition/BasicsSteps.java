@@ -1,7 +1,7 @@
 package stepDefinition;
 
-import basics.BasicGET;
-import basics.BasicPOST;
+import basicsRequests.BasicGET;
+import basicsRequests.BasicPOST;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
