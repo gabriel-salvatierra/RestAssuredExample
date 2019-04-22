@@ -2,6 +2,8 @@ package dataProvider;
 
 public class PayLoad {
 
+    // THIS CLASS MUST BE DEPRECATED
+
     public static String getPlaceBody() {
         String body = "{" +
                 "\"location\": {" +
