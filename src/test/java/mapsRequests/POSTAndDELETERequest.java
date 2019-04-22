@@ -1,5 +1,6 @@
 package mapsRequests;
 
+import dataProvider.Parsers;
 import dataProvider.PayLoad;
 import dataProvider.Resources;
 import io.restassured.RestAssured;
@@ -13,13 +14,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class POSTAndDELETERequest {
 
-    public static String createPlace() {
+    public static JsonPath createPlace() {
 
         RestAssured.baseURI = FileReaderManager.getInstance().getConfigReader().getHost();
 
         Response createResponse = given().
                 queryParam("key", FileReaderManager.getInstance().getConfigReader().getKey()).
-                body(PayLoad.createPlaceBody()).
+                body(PayLoad.getPlaceBody()).
                 when().
                 post("/maps/api/place/add/json").
                 then().assertThat().
@@ -30,22 +31,21 @@ public class POSTAndDELETERequest {
 
         String createResponseString = createResponse.asString();
         System.out.println(createResponseString);
-        return createResponseString;
+        return Parsers.rawToJSON(createResponse);
     }
 
-    public static void deletePlace(String createResponseString) {
+    public static void deletePlace(JsonPath responseJSON) {
 
-        JsonPath createResponseJSON = new JsonPath(createResponseString);
-        String placeId = createResponseJSON.get("place_id");
-        System.out.println("place_id to delete: " + placeId);
+        String idToDelete = responseJSON.get("place_id");
+        System.out.println("place_id to delete: " + idToDelete);
 
         given().
                 queryParam("key", FileReaderManager.getInstance().getConfigReader().getKey()).
                 body("{" +
-                        "\"place_id\":\"" + placeId + "\"" +
+                        "\"place_id\":\"" + idToDelete + "\"" +
                         "}").
                 when().
-                post(Resources.createPlaceResource()).
+                post(Resources.deletePlaceResource()).
                 then().assertThat().
                 statusCode(200).and().
                 contentType(ContentType.JSON).and().

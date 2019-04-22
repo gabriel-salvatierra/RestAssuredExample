@@ -2,7 +2,7 @@ package dataProvider;
 
 public class PayLoad {
 
-    public static String createPlaceBody() {
+    public static String getPlaceBody() {
         String body = "{" +
                 "\"location\": {" +
                 "\"lat\": -33.8669710," +
