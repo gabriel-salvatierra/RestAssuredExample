@@ -18,6 +18,7 @@ public class POSTAndDELETERequest {
 
         RestAssured.baseURI = FileReaderManager.getInstance().getConfigReader().getHost();
 
+        System.out.println("Response:");
         Response createResponse = given().
                 queryParam("key", FileReaderManager.getInstance().getConfigReader().getKey()).
                 body(PayLoad.getPlaceBody()).
@@ -26,12 +27,11 @@ public class POSTAndDELETERequest {
                 then().assertThat().
                 statusCode(200).and().
                 contentType(ContentType.JSON).and().
-                body("status", equalTo("OK")).
+                body("status", equalTo("OK")).log().body().
                 extract().response();
 
-        String createResponseString = createResponse.asString();
-        System.out.println(createResponseString);
         return Parsers.rawToJSON(createResponse);
+        // crear una clase a partir del JSON
     }
 
     public static void deletePlace(JsonPath responseJSON) {
