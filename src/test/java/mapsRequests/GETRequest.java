@@ -35,7 +35,7 @@ public class GETRequest {
 
         int resultsSize = responseJSON.get("results.size()");
         for (int i = 0; i < resultsSize; i++) {
-            System.out.println(responseJSON.get("results[" + i + "].name"));
+            System.out.println((String) responseJSON.get("results[" + i + "].name"));
         }
     }
 

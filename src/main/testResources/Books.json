@@ -1,0 +1,20 @@
+[
+  {
+    "name":"The Book I",
+    "isbn":"A1B2",
+    "aisle":"444",
+    "author":"Some guy"
+  },
+  {
+    "name":"Learn Appium Automation with Java",
+    "isbn":"ABCD",
+    "aisle":"1234",
+    "author":"Arsene"
+  },
+  {
+    "name":"Best Book",
+    "isbn":"AAA000",
+    "aisle":"1010",
+    "author":"Best Author"
+  }
+]
